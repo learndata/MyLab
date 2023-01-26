@@ -5,6 +5,12 @@ pipeline{
         maven 'maven'
     }
 
+    environment {
+        ArtifactId = readMavenPom().getArtifactId()
+        Version = readMavenPom().getVersion()
+        Name = readMavenPom().getName()
+    }
+
     stages {
         // Specify various stage with in stages
 
@@ -34,9 +40,20 @@ pipeline{
         //     }
         // }
 
+        // Stage 3 - publish to nexus
         stage ('Publish to Nexus') {
             steps {
                 nexusArtifactUploader artifacts: [[artifactId: 'DansDevOpsLab', classifier: '', file: 'target/DansDevOpsLab-0.0.5-SNAPSHOT.war', type: 'war']], credentialsId: 'b7cd8268-fff7-4247-88ad-71a53132e0b0', groupId: 'com.vinaysdevopslab', nexusUrl: '172.20.10.60:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'DansDevOpsLab-SNAPSHOT', version: '0.0.5-SNAPSHOT'
+            }
+        }
+
+        // Stage 4 - print info
+        stage ('Print Environment Variable') {
+            steps {
+                echo "Artifact Id is '${ArtifactId}'"
+                echo "Version is '${Version}'"
+                echo "GroupID is '{}'"
+                echo "Name is '${Name}'"
             }
         }
 
