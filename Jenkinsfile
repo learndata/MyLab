@@ -51,7 +51,7 @@ pipeline{
                     nexusArtifactUploader artifacts: 
                     [[artifactId: "${ArtifactId}", 
                     classifier: '', 
-                    file: 'target/DansDevOpsLab-0.0.5-SNAPSHOT.war', 
+                    file: "target/${ArtifactId}-${Version}.war", 
                     type: 'war']], 
                     credentialsId: 'b7cd8268-fff7-4247-88ad-71a53132e0b0', 
                     groupId: "${GroupId}", 
