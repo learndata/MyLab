@@ -44,18 +44,23 @@ pipeline{
         // Stage 3 - publish to nexus
         stage ('Publish to Nexus') {
             steps {
-                nexusArtifactUploader artifacts: 
-                [[artifactId: "${ArtifactId}", 
-                classifier: '', 
-                file: 'target/DansDevOpsLab-0.0.5-SNAPSHOT.war', 
-                type: 'war']], 
-                credentialsId: 'b7cd8268-fff7-4247-88ad-71a53132e0b0', 
-                groupId: "${GroupId}", 
-                nexusUrl: '172.20.10.60:8081', 
-                nexusVersion: 'nexus3', 
-                protocol: 'http', 
-                repository: 'DansDevOpsLab-SNAPSHOT', 
-                version: "${Version}"
+                script {
+                    // Use Version postfix to determine if this is a snapshot or release version
+                    def NexusRepo = Version.endsWith("SNAPSHOT") ? 'DansDevOpsLab-SNAPSHOT' : 'DansDevOpsLab-RELEASE'
+
+                    nexusArtifactUploader artifacts: 
+                    [[artifactId: "${ArtifactId}", 
+                    classifier: '', 
+                    file: 'target/DansDevOpsLab-0.0.5-SNAPSHOT.war', 
+                    type: 'war']], 
+                    credentialsId: 'b7cd8268-fff7-4247-88ad-71a53132e0b0', 
+                    groupId: "${GroupId}", 
+                    nexusUrl: '172.20.10.60:8081', 
+                    nexusVersion: 'nexus3', 
+                    protocol: 'http', 
+                    repository: "${NexusRepo}", 
+                    version: "${Version}"
+                }
             }
         }
 
