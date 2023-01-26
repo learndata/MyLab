@@ -45,17 +45,17 @@ pipeline{
         stage ('Publish to Nexus') {
             steps {
                 nexusArtifactUploader artifacts: 
-                [[artifactId: '${ArtifactId}', 
+                [[artifactId: "${ArtifactId}", 
                 classifier: '', 
                 file: 'target/DansDevOpsLab-0.0.5-SNAPSHOT.war', 
                 type: 'war']], 
                 credentialsId: 'b7cd8268-fff7-4247-88ad-71a53132e0b0', 
-                groupId: '${GroupId}', 
+                groupId: "${GroupId}", 
                 nexusUrl: '172.20.10.60:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
                 repository: 'DansDevOpsLab-SNAPSHOT', 
-                version: '${Version}'
+                version: "${Version}"
             }
         }
 
