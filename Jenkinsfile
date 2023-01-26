@@ -36,7 +36,7 @@ pipeline{
 
         stage ('Publish to Nexus') {
             steps {
-                 nexusArtifactUploader artifacts: [[artifactId: 'DansDevOpsLab', classifier: '', file: 'target/DansDevOpsLab-0.0.4-SNAPSHOT.war', type: 'war']], credentialsId: 'df8850ac-7c3c-4384-85ec-5d10c09debe3', groupId: 'com.vinaysdevopslab', nexusUrl: '172.20.10.60:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'DansDevOpsLab-SNAPSHOT', version: '0.0.4-SNAPSHOT'
+                nexusArtifactUploader artifacts: [[artifactId: 'DansDevOpsLab', classifier: '', file: 'target/DansDevOpsLab-0.0.5-SNAPSHOT.war', type: 'war']], credentialsId: 'b7cd8268-fff7-4247-88ad-71a53132e0b0', groupId: 'com.vinaysdevopslab', nexusUrl: '172.20.10.60:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'DansDevOpsLab-SNAPSHOT', version: '0.0.5-SNAPSHOT'
             }
         }
 
