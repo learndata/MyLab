@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Vinay's DevOps Lab updated!</title>
+    <title>Vinay's DevOps Lab Docker!</title>
 
 
     <!-- Custom styles for this template -->
